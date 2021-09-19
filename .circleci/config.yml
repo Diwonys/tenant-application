@@ -15,14 +15,8 @@ jobs:
           name: Build App
           command: 
             dotnet build
-      - run:
-          working_directory: ~/project/WebApplication/TenantApplication 
-          environment:
-            - ASPNETCORE_ENVIRONMENT=Development
-            - ASPNETCORE_URLS=https://+:443;http://+:80
-          ports:
-            - "5001:443"
-            - "5000:80"
-          name: Run App
-          command:
-            dotnet run
+      # - run:
+      #     working_directory: ~/project/WebApplication/TenantApplication 
+      #     name: Run App
+      #     command:
+      #       dotnet run
