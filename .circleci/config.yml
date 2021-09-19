@@ -5,16 +5,18 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       - checkout
-      - run:
-          working_directory: ~/project/WebApplication
+      - run:   
+          working_directory: ~/project/WebApplication/TenantApplication
           name: Restore packages
           command: 
             dotnet restore
       - run:
+          working_directory: ~/project/WebApplication/TenantApplication
           name: Build App
           command: 
             dotnet build
       - run:
+          working_directory: ~/project/WebApplication/TenantApplication 
           name: Run App
           command: 
             dotnet run
