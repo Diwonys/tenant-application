@@ -18,7 +18,5 @@ jobs:
       - run:
           working_directory: ~/project/WebApplication/TenantApplication 
           name: Run App
-          command: 
-            dotnet dev-certs https --clean
-            dotnet dev-certs https -t
+          command:
             dotnet run
