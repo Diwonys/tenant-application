@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
+          working_directory: ~/project/WebApplication/TenantApplication
           name: Restore packages
           command: 
             dotnet restore
