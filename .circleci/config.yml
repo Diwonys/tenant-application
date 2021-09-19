@@ -15,6 +15,11 @@ jobs:
           name: Build App
           command: 
             dotnet build
+      - run:
+          working_directory: ~/project/WebApplication/TenantApplication.Tests
+          name: App Tests
+          command:
+            dotnet test
       # - run:
       #     working_directory: ~/project/WebApplication/TenantApplication 
       #     name: Run App
