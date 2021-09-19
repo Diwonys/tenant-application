@@ -17,8 +17,12 @@ jobs:
             dotnet build
       - run:
           working_directory: ~/project/WebApplication/TenantApplication 
+          environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+          ports:
+            - "5001:443"
+            - "5000:80"
           name: Run App
           command:
-            dotnet dev-certs https --clean &&
-            dotnet dev-certs https -t &&
             dotnet run
