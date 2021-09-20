@@ -54,7 +54,6 @@ namespace TenantApplication
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Workflow v1"));
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
