@@ -28,7 +28,6 @@ namespace TenantApplication.Services
                 .ToListAsync();
 
             return tenants.FirstOrDefault(e => e.ParentTenantId == null);
-
         }
 
         public async Task<Tenant> UpdateTenant(Tenant tenant)
