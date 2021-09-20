@@ -29,7 +29,6 @@ namespace TenantApplication.Services
 
             //return tenants.FirstOrDefault(e => e.ParentTenantId == null);
             return null;
-
         }
 
         public async Task<Tenant> UpdateTenant(Tenant tenant)
