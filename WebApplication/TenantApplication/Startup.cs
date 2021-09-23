@@ -25,7 +25,7 @@ namespace TenantApplication
 
         public void ConfigureServices(IServiceCollection services)
         {   
-            services.AddDbContext<Models.TenantsContext>(options =>
+            services.AddDbContext<TenantsContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution));
 

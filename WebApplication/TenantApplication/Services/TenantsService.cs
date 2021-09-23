@@ -16,7 +16,7 @@ namespace TenantApplication.Services
         public TenantsService(TenantsContext tenantsContext)
         {
             _tenantsContext = tenantsContext;
-            //InitializeDB().Wait();
+            InitializeDB().Wait();
         }
 
         public async Task<Tenant> GetRootTenant()
