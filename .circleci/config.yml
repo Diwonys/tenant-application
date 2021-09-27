@@ -46,7 +46,6 @@ jobs:
           name: Build Docker
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose up
             docker build -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f Dockerfile .
       - run: 
           name: Push Docker image
