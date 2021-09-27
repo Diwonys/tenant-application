@@ -44,9 +44,9 @@ jobs:
       
       - run:
           name: Build Docker
-          working_directory: ~/project/WebApplication
+          working_directory: ~/project/WebApplication/TenantApplication
           command: |
-            docker build -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f Dockerfile .
+            docker build . -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f TenantApplication/Dockerfile
       - run: 
           name: Push Docker image
           command: |
