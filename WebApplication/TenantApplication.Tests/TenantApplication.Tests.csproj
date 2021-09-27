@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Workflow\TenantApplication.csproj" />
+    <ProjectReference Include="..\TenantApplication\TenantApplication.csproj" />    
   </ItemGroup>
 
 </Project>
