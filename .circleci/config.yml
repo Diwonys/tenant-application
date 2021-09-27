@@ -41,17 +41,18 @@ jobs:
           working_directory: ~/project/WebApplication
           command: |
             docker-compose build
-      # - run:
-      #     name: Build Docker
-      #     working_directory: ~/project/WebApplication
-      #     command: |
-      #       docker-compose up
-          #  docker build -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f Dockerfile .
-      # - run: 
-      #     name: Push Docker image
-      #     command: |
-      #       echo $DOCKER_PWD | docker login --username $DOCKER_LOGIN --password-stdin 
-      #       docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
+      
+      - run:
+          name: Build Docker
+          working_directory: ~/project/WebApplication
+          command: |
+            docker-compose up
+            docker build -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f Dockerfile .
+      - run: 
+          name: Push Docker image
+          command: |
+            echo $DOCKER_PWD | docker login --username $DOCKER_LOGIN --password-stdin 
+            docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
   
       # - run: 
       #     name: Deploy app to Digital Ocean Server via Docker
