@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  tenantapplication:
+    image: ${DOCKER_REGISTRY-}tenantapplication
+    build:
+      context: .
+      dockerfile: TenantApplication/Dockerfile
+    depends_on:
+        - db
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=718281828
+    ports: 
+      - "5432:5432"
