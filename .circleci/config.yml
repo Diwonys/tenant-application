@@ -22,6 +22,7 @@ jobs:
           command:
             dotnet test
 
+
   docker-build:
     machine: true
     steps:
