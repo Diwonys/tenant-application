@@ -55,6 +55,7 @@ jobs:
   
       - run: 
           name: Deploy app to Digital Ocean Server via Docker
+          working_directory: ~/project/WebApplication
           command: |
             scp docker-compose.yml root@77.73.69.188:/bin/docker_config_bash
         #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 ""
