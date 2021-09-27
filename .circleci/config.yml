@@ -58,6 +58,7 @@ jobs:
           working_directory: ~/project/WebApplication
           command: |
             scp docker-compose.yml root@77.73.69.188:/bin/docker_config_bash
+            scp docker-compose-override.yml root@77.73.69.188:/bin/docker_config_bash
         #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 ""
         #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
 
