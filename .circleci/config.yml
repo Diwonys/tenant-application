@@ -1,6 +1,6 @@
 version: 2.0
 jobs: 
-  build:
+  tests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -9,19 +9,58 @@ jobs:
           working_directory: ~/project/WebApplication/TenantApplication
           name: Restore packages
           command: 
-            dotnet restore
+            dotnet restore            
       - run:
           working_directory: ~/project/WebApplication/TenantApplication
           name: Build App
           command: 
             dotnet build
+
       - run:
           working_directory: ~/project/WebApplication/TenantApplication.Tests
           name: App Tests
           command:
             dotnet test
-      # - run:
-      #     working_directory: ~/project/WebApplication/TenantApplication 
-      #     name: Run App
-      #     command:
-      #       dotnet run
+
+  docker-build:
+    machine: true
+    steps:
+      - checkout
+      # - add_ssh_keys:
+      #       fingerprints:
+      #         - "27:eb:cd:ff:4e:9f:18:06:9a:aa:3e:7f:e8:ff:a0:f5"
+      - run: 
+          name: Update docker-compose
+          command: |
+            sudo chmod +x /usr/local/bin/docker-compose;
+            sudo rm /usr/local/bin/docker-compose
+            curl -L https://github.com/docker/compose/releases/download/1.11.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            docker-compose --version
+      - run:
+          name: Build Docker
+          working_directory: ~/project/WebApplication
+          command: |
+            docker-compose up
+          #  docker build -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG -f Dockerfile .
+      # - run: 
+      #     name: Push Docker image
+      #     command: |
+      #       echo $DOCKER_PWD | docker login --username $DOCKER_LOGIN --password-stdin 
+      #       docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
+  
+      # - run: 
+      #     name: Deploy app to Digital Ocean Server via Docker
+      #     command: |
+      #       ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
+
+workflows:
+  version: 2
+  tests-build_deploy:
+    jobs:
+      - tests
+      - docker-build
+
+
+
+      #docker-compose  -f "D:\Intership\multitenant-application\WebApplication\docker-compose.yml" -f "D:\Intership\multitenant-application\WebApplication\docker-compose.override.yml" -f "D:\Intership\multitenant-application\WebApplication\obj\Docker\docker-compose.vs.debug.g.yml" -p dockercompose10422225039781104549 --no-ansi up -d
+      #1>--no-ansi option is deprecated and will be removed in future versions. Use `--ansi never` instead.
