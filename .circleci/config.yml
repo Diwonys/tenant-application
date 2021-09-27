@@ -27,9 +27,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      # - add_ssh_keys:
-      #       fingerprints:
-      #         - "27:eb:cd:ff:4e:9f:18:06:9a:aa:3e:7f:e8:ff:a0:f5"
+      - add_ssh_keys:
+            fingerprints:
+              - "27:eb:cd:ff:4e:9f:18:06:9a:aa:3e:7f:e8:ff:a0:f5"
       - run:
           name: Install Docker Compose
           command: |
@@ -53,10 +53,11 @@ jobs:
             echo $DOCKER_PWD | docker login --username $DOCKER_LOGIN --password-stdin 
             docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
   
-      # - run: 
-      #     name: Deploy app to Digital Ocean Server via Docker
-      #     command: |
-      #       ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
+      - run: 
+          name: Deploy app to Digital Ocean Server via Docker
+          command: |
+            ssh -o StrictHostKeyChecking=no root@77.73.69.188 "touch test.txt"
+        #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
 
 workflows:
   version: 2
