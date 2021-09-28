@@ -40,7 +40,8 @@ jobs:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose -e ASPNETCORE_ENVIRONMENT=Development ^ -v %APPDATA%/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro  ^ up
+            set -x
+            docker-compose up -d
           #  docker-compose build
       
       - run:
