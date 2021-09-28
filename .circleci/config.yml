@@ -68,6 +68,7 @@ jobs:
       #       ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
       - run:
           name: Deploy 
+          working_directory: ~/project/WebApplication
           command: |
             docker-compose -H "ssh://root@77.73.69.188" up
 
