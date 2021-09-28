@@ -40,7 +40,8 @@ jobs:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose build
+            docker-compose up
+          #  docker-compose build
       
       - run:
           name: Build Docker
