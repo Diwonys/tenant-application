@@ -65,10 +65,7 @@ jobs:
           working_directory: ~/project/DeploySctipts
           command: |
             scp deploy_app.sh root@77.73.69.188:/bin/docker_config_bash
-
-        #  scp docker_config_bash.sh root@77.73.69.188:/bin/docker_config_bash
-        #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 ""
-        #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
+            ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
 
 workflows:
   version: 2
@@ -76,8 +73,3 @@ workflows:
     jobs:
       - tests
       - docker-build
-
-
-
-      #docker-compose  -f "D:\Intership\multitenant-application\WebApplication\docker-compose.yml" -f "D:\Intership\multitenant-application\WebApplication\docker-compose.override.yml" -f "D:\Intership\multitenant-application\WebApplication\obj\Docker\docker-compose.vs.debug.g.yml" -p dockercompose10422225039781104549 --no-ansi up -d
-      #1>--no-ansi option is deprecated and will be removed in future versions. Use `--ansi never` instead.
