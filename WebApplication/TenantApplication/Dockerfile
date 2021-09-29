@@ -17,9 +17,9 @@ FROM build AS publish
 RUN dotnet publish "TenantApplication.csproj" -c Release -o /app/publish
 
 FROM base AS final
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path="./webserver.pfx"
+#ENV ASPNETCORE_Kestrel__Certificates__Default__Path="./webserver.pfx"
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY ["webserver.pfx", "WebApplication/%USERPROFILE%/.aspnet/https"]
+#COPY ["webserver.pfx", "WebApplication/%USERPROFILE%/.aspnet/https"]
 ENTRYPOINT ["dotnet", "TenantApplication.dll"]
