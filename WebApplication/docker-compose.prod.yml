@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  tenantapplication:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=4a6f27df-efce-4a41-a0bb-01d1db0ce237
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
