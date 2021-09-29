@@ -50,7 +50,7 @@ jobs:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose up -f "docker-compose.yml" -f "docker-compose.prod.yml" -d
+            docker-compose up -f "docker-compose.yml" -f "docker-compose.prod.yml"
           #  docker-compose build
       
       # - run: 
