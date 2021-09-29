@@ -22,5 +22,5 @@ ENV ASPNETCORE_Kestrel__Certificates__Default__Path="./webserver.pfx"
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY webserver.pfx .
+COPY webserver.pfx /app
 ENTRYPOINT ["dotnet", "TenantApplication.dll"]
