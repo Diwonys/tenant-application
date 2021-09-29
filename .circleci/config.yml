@@ -53,8 +53,6 @@ jobs:
             docker-compose up -f "docker-compose.yml" -f "docker-compose.prod.yml" -d
           #  docker-compose build
       
-      
-  
       # - run: 
       #     name: Deploy app to Digital Ocean Server via Docker
       #     working_directory: ~/project/WebApplication
