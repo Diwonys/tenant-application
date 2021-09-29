@@ -31,18 +31,6 @@ jobs:
             fingerprints:
               - "27:eb:cd:ff:4e:9f:18:06:9a:aa:3e:7f:e8:ff:a0:f5"
       - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: Start container and verify it is working
-          working_directory: ~/project/WebApplication
-          command: |
-            docker-compose build
-      
-      - run:
           name: Build Docker
           working_directory: ~/project/WebApplication
           command: |
@@ -52,16 +40,37 @@ jobs:
           command: |
             echo $DOCKER_PWD | docker login --username $DOCKER_LOGIN --password-stdin 
             docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
-  
-      - run: 
-          name: Deploy app to Digital Ocean Server via Docker
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
-            scp docker-compose.yml root@77.73.69.188:/bin/docker_config_bash
-            scp docker-compose.override.yml root@77.73.69.188:/bin/docker_config_bash
-        #  scp docker_config_bash.sh root@77.73.69.188:/bin/docker_config_bash
-        #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 ""
-        #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
+            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up -d
+          #  docker-compose build
+      
+      # - run: 
+      #     name: Deploy app to Digital Ocean Server via Docker
+      #     working_directory: ~/project/WebApplication
+      #     command: |
+      #       scp docker-compose.yml root@77.73.69.188:/bin/docker_config_bash
+      #       scp docker-compose.override.yml root@77.73.69.188:/bin/docker_config_bash
+
+      # - run:
+      #     name: Start docker-compose on the server
+      #     working_directory: ~/project/DeploySctipts
+      #     command: |
+      #       scp deploy_app.sh root@77.73.69.188:/bin/docker_config_bash
+      #       ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
+      - run:
+          name: Deploy 
+          working_directory: ~/project/WebApplication
+          command: |
+            docker-compose -H "ssh://root@77.73.69.188" up -d
 
 workflows:
   version: 2
@@ -69,8 +78,3 @@ workflows:
     jobs:
       - tests
       - docker-build
-
-
-
-      #docker-compose  -f "D:\Intership\multitenant-application\WebApplication\docker-compose.yml" -f "D:\Intership\multitenant-application\WebApplication\docker-compose.override.yml" -f "D:\Intership\multitenant-application\WebApplication\obj\Docker\docker-compose.vs.debug.g.yml" -p dockercompose10422225039781104549 --no-ansi up -d
-      #1>--no-ansi option is deprecated and will be removed in future versions. Use `--ansi never` instead.
