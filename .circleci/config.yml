@@ -57,12 +57,6 @@ jobs:
           command: |
             scp deploy_app.sh root@77.73.69.188:/bin/docker_config_bash
             ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh"
-          #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
-      # - run:
-      #     name: Deploy 
-      #     working_directory: ~/project/WebApplication
-      #     command: |
-      #       docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" -H "ssh://root@77.73.69.188" up
 
 workflows:
   version: 2
