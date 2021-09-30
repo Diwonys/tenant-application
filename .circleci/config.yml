@@ -22,7 +22,6 @@ jobs:
           command:
             dotnet test
 
-
   docker-build:
     machine: true
     steps:
@@ -50,8 +49,8 @@ jobs:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up
-            
+            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up -d
+
       # - run: 
       #     name: Deploy app to Digital Ocean Server via Docker
       #     working_directory: ~/project/WebApplication
@@ -69,7 +68,7 @@ jobs:
           name: Deploy 
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose -H "ssh://root@77.73.69.188" up -d
+            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" -H "ssh://root@77.73.69.188" up -d
 
 workflows:
   version: 2
