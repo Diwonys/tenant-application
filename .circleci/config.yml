@@ -47,11 +47,14 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
-          name: Creating certificates
+          name: Dotnet installation
           command: |
             sudo apt update 
             sudo apt install apt-transport-https 
             sudo apt install dotnet-runtime-3.1 
+      - run:
+          name: Creating certificates
+          command: |
             dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p $CERTS_PWD
             dotnet dev-certs https --trust
       - run:
