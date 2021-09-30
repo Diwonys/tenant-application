@@ -47,6 +47,11 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
+          name: Creating certificates
+          command: |
+            dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
+            dotnet dev-certs https --trust
+      - run:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
