@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# docker stop $(docker ps -qa)
-# docker rm $(docker ps -qa)
-# docker rmi $(docker images -q)
+cd /bin/docker_config_bash
 
-# cd tenant-application
-# git pull
+docker stop $(docker ps -qa)
+docker rm $(docker ps -qa)
+docker rmi $(docker images -q)
 
-# cd WebApplication
-# docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up -d
+cd tenant-application
+git pull
 
-touch test.txt
+cd WebApplication
+docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up -d
