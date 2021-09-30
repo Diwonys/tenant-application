@@ -56,8 +56,7 @@ jobs:
           working_directory: ~/project/DeploySctipts
           command: |
             scp deploy_app.sh root@77.73.69.188:/bin/docker_config_bash
-            ssh -o StrictHostKeyChecking=no root@77.73.69.188 "touch test.txt"
-          #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh"
+            ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh"
           #  ssh -o StrictHostKeyChecking=no root@77.73.69.188 "/bin/docker_config_bash/./deploy_app.sh $DOCKER_LOGIN/$IMAGE_NAME:$TAG"
       # - run:
       #     name: Deploy 
