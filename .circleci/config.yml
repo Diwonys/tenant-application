@@ -22,7 +22,6 @@ jobs:
           command:
             dotnet test
 
-
   docker-build:
     machine: true
     steps:
@@ -47,27 +46,11 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
-          name: Dotnet installation
-          command: |
-            wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-            sudo dpkg -i packages-microsoft-prod.deb
-            rm packages-microsoft-prod.deb
-            sudo apt-get update; \
-              sudo apt-get install -y apt-transport-https && \
-              sudo apt-get update && \
-              sudo apt-get install -y dotnet-sdk-5.0
-      - run:
-          name: Creating certificates
-          command: |
-            dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p $CERTS_PWD
-            dotnet dev-certs https --trust
-      - run:
           name: Start container and verify it is working
           working_directory: ~/project/WebApplication
           command: |
             docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" up -d
-          #  docker-compose build
-      
+
       # - run: 
       #     name: Deploy app to Digital Ocean Server via Docker
       #     working_directory: ~/project/WebApplication
@@ -85,7 +68,7 @@ jobs:
           name: Deploy 
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose -H "ssh://root@77.73.69.188" up -d
+            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" -H "ssh://root@77.73.69.188" up
 
 workflows:
   version: 2
