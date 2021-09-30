@@ -68,7 +68,7 @@ jobs:
           name: Deploy 
           working_directory: ~/project/WebApplication
           command: |
-            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" -H "ssh://root@77.73.69.188" up -d
+            docker-compose -f "docker-compose.yml" -f "docker-compose.prod.yml" -H "ssh://root@77.73.69.188" up
 
 workflows:
   version: 2
