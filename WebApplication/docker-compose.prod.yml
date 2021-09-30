@@ -12,4 +12,3 @@ services:
       - "443"
     volumes:
       - ./%USERPROFILE%/.aspnet/https:/https
-      #- C:/Users/Xiaomi/Desktop/cred:/https
